@@ -6,4 +6,11 @@
  */
 public class Record {
 
+    private int id;
+    private float key;
+    
+    public float compareTo(Record compare) {
+        return compare.key - this.key;
+    }
+
 }
