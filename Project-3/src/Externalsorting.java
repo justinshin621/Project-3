@@ -2,7 +2,7 @@
 public class Externalsorting {
 
     public static void main(String[] args) {
-        System.out.println("Why hello there");
+        SelectionSort.read(args[1], args[2]);
     }
 
 }
