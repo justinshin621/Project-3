@@ -6,7 +6,7 @@
  */
 public class Heap {
 
-    private Record[] heap;
+    public Record[] heap;
     private int maxsize;
     private int size;
 
@@ -49,7 +49,7 @@ public class Heap {
      *            The index of the node we are checking
      * @return Return the position for the left child
      */
-    public int leftchild(int pos) {
+    public int leftChild(int pos) {
         if (pos >= size / 2) {
             return -1;
         }
@@ -63,7 +63,7 @@ public class Heap {
      *            The index of the node we are checking
      * @return Return the position for the right child
      */
-    public int rightchild(int pos) {
+    public int rightChild(int pos) {
         if (pos >= (size - 1) / 2) {
             return -1;
         }
@@ -78,11 +78,8 @@ public class Heap {
      * @return The position for the parent
      */
     public int parent(int pos) {
-        if (pos < 0) {
+        if (pos <= 0) {
             return -1;
-        }
-        if (pos == 0) {
-            return 0;
         }
         return (pos - 1) / 2;
     }
@@ -114,7 +111,7 @@ public class Heap {
      */
     public void buildheap() {
         for (int i = size / 2 - 1; i >= 0; i--) {
-            siftdown(i);
+            siftDown(i);
         }
     }
     
@@ -123,13 +120,14 @@ public class Heap {
      * 
      * @param pos The position for the element
      */
-    public void siftdown(int pos) {
+    public void siftDown(int pos) {
+
         if ((pos < 0) || (pos >= size)) return; // Illegal position
         while (!isLeaf(pos)) {
-          int j = leftchild(pos);
-          if ((j<(size-1)) && (heap[j].compareTo(heap[j+1]) > 0))
-            j++; // j is now index of child with lesser value
-          if (heap[pos].compareTo(heap[j]) <= 0) return;
+          int j = leftChild(pos);
+          if ((j<(size-1)) && (heap[j].compareTo(heap[j+1]) < 0))
+            j++; // j is now index of child with greater value
+          if (heap[pos].compareTo(heap[j]) >= 0) return;
           swap(heap, pos, j);
           pos = j;  // Move down
         }
@@ -163,17 +161,29 @@ public class Heap {
             return null; // Removing from empty heap
         }
         swap(heap, 0, --size); // Swap maximum with last value
-        siftdown(0); // Put new heap root val in correct place
+        siftDown(0); // Put new heap root val in correct place
         return heap[size];
     }
     
-    public void print() 
-    { 
-        for (int i = 1; i <= size / 2; i++) { 
-            System.out.print(" PARENT : " + heap[i] 
-                             + " LEFT CHILD : " + heap[2 * i] 
-                             + " RIGHT CHILD :" + heap[2 * i + 1]); 
-            System.out.println(); 
-        } 
-    } 
+    public void print() {
+        String str = "{ ";
+        
+        int start = 0;
+        int levelSize = 1;
+        while (start < getSize()) {
+            // print all of the items at the current level of the tree
+            str += "( ";
+            for (int i = start; i < start + levelSize && i < getSize(); i++)
+                str += (heap[i].toString() + " ");
+            str += ") ";
+            
+            // move down to the next level
+            start += levelSize;
+            levelSize *= 2;
+        }
+        
+        str += "}";
+        System.out.println(str);
+    }
+
 }
