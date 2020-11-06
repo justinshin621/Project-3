@@ -2,7 +2,7 @@
 public class Externalsorting {
 
     public static void main(String[] args) {
-        SelectionSort.read(args[1], args[2]);
+        SelectionSort.read(args[0], args[1]);
     }
 
 }
