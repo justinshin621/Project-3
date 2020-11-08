@@ -6,7 +6,7 @@
  */
 public class Heap {
 
-    public Record[] heap;
+    private Record[] heap;
     private int maxsize;
     private int size;
 
@@ -17,7 +17,7 @@ public class Heap {
      *            The maxsize for the heap
      */
     public Heap(int m) {
-        heap = new Record[m+1];
+        heap = new Record[m];
         maxsize = m;
         size = 0;
     }
@@ -31,7 +31,14 @@ public class Heap {
         return size;
     }
 
-
+    /**
+     * 
+     * @return True if the heap reached maxsize, false if not
+     */
+    public boolean isFull() {
+        return size == maxsize;
+    }
+    
     /**
      * 
      * @param pos
@@ -104,6 +111,8 @@ public class Heap {
             curr = parent(curr);
         }
     }
+    
+    
 
 
     /**

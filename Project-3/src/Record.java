@@ -34,6 +34,14 @@ public class Record {
     
     /**
      * 
+     * @return The byte array data in the record
+     */
+    public byte[] getData() {
+        return this.data;
+    }
+    
+    /**
+     * 
      * @param compare The record that we are comparing to
      * @return The difference of key values
      */
