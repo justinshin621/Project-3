@@ -148,6 +148,13 @@ public class Heap {
         }
       } 
 
+    /**
+     * Swaps the first and last records of the heap
+     */
+    public void swapFirstAndLast() {
+    	swap(this.heap, 0, size);
+    }
+    
 
     /**
      * Swapping the elements from the array based on two indices

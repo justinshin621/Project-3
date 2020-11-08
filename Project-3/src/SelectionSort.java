@@ -37,12 +37,14 @@ public class SelectionSort {
 
 		// ArrayList to keep track of run counters
 		ArrayList<Integer> runList = new ArrayList<Integer>();
-
+		inputBuffer = new byte[BLOCK_SIZE];
+		
 		// Edge case that deals with when the number of blocks
 		// in the binary file is greater than 16
 		for (int i = 0; i < numOfBlocks; i++) {
-			inputBuffer = new byte[BLOCK_SIZE];
-			raf.read(inputBuffer, 0, BLOCK_SIZE);
+			raf.seek(i * BLOCK_SIZE);
+			raf.read(inputBuffer);
+			
 			// Inserts values until the heap is full
 			if (!minHeap.isFull()) {
 				for (int j = inputBuffer.length; j >= 0; j -= 8) {
@@ -52,16 +54,22 @@ public class SelectionSort {
 			}
 			// Start output buffer process
 			else {
+				// Iterate through each block after the heap becomes full
 				for (int j = inputBuffer.length; j >= 0; j -= 8) {
-
 					Record temp = new Record(Arrays.copyOfRange(inputBuffer, j - 8, j));
 					outputBuffer[bufferCounter] = minHeap.removeMin();
+					// Checks if the input buffer record is greater than the min value of
+					// the heap.
 					if (temp.compareTo(outputBuffer[bufferCounter]) > 0
 							|| temp.compareTo(outputBuffer[bufferCounter]) == 0) {
 						minHeap.insert(temp);
+						bufferCounter++;
 					} else {
-
+						minHeap.insert(temp);
+						minHeap.swapFirstAndLast();
+						
 					}
+					bufferCounter++;
 				}
 			}
 		}
