@@ -47,28 +47,33 @@ public class SelectionSort {
 			
 			// Inserts values until the heap is full
 			if (!minHeap.isFull()) {
-				for (int j = inputBuffer.length; j >= 0; j -= 8) {
-					Record temp = new Record(Arrays.copyOfRange(inputBuffer, j - 8, j));
+				for (int j = 0; j < inputBuffer.length; j += 8) {
+					Record temp = new Record(Arrays.copyOfRange(inputBuffer, 0, j + 8));
 					minHeap.insert(temp);
 				}
 			}
 			// Start output buffer process
 			else {
+				System.out.println("i: " + i); 
+				System.out.println(bufferCounter);
 				// Iterate through each block after the heap becomes full
-				for (int j = inputBuffer.length; j >= 0; j -= 8) {
-					Record temp = new Record(Arrays.copyOfRange(inputBuffer, j - 8, j));
+				for (int j = 0; j < inputBuffer.length; j += 8) {
+					System.out.println("j: " + j);
+					Record temp = new Record(Arrays.copyOfRange(inputBuffer, 0, j + 8));
 					outputBuffer[bufferCounter] = minHeap.removeMin();
+					runCounter++;
 					// Checks if the input buffer record is greater than the min value of
 					// the heap.
-					if (temp.compareTo(outputBuffer[bufferCounter]) > 0
-							|| temp.compareTo(outputBuffer[bufferCounter]) == 0) {
+					if (temp.compareTo(outputBuffer[bufferCounter]) >= 0) {
 						minHeap.insert(temp);
-						bufferCounter++;
-					} else {
+					}
+					else {
 						minHeap.insert(temp);
 						minHeap.swapFirstAndLast();
-						
+						minHeap.buildheap();
 					}
+					
+					// if bufferCounter == 1024 : place into run file
 					bufferCounter++;
 				}
 			}

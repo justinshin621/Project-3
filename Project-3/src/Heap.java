@@ -125,7 +125,7 @@ public class Heap {
      * Building the heap to be in correct order
      */
     public void buildheap() {
-        for (int i = size / 2 - 1; i >= 0; i--) {
+        for (int i = maxsize / 2 - 1; i >= 0; i--) {
             siftDown(i);
         }
     }
@@ -149,10 +149,11 @@ public class Heap {
       } 
 
     /**
-     * Swaps the first and last records of the heap
+     * Swaps the first and last records of the heap and decrements size
      */
     public void swapFirstAndLast() {
-    	swap(this.heap, 0, size);
+    	swap(this.heap, 0, size - 1);
+    	this.size--;
     }
     
 
