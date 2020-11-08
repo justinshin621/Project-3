@@ -86,8 +86,13 @@ public class SelectionSort {
 					
 					Record temp = new Record(Arrays.copyOfRange(inputBuffer, j - 8, j));
 					outputBuffer[bufferCounter] = minHeap.removeMin();
-					if (temp.compareTo(minRecord))
-					if ( )
+					if (temp.compareTo(outputBuffer[bufferCounter]) > 0 ||
+							temp.compareTo(outputBuffer[bufferCounter]) == 0) {
+						minHeap.insert(temp);
+					}
+					else {
+						
+					}
 				}
 			}
 		}
