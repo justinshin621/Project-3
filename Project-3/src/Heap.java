@@ -33,6 +33,14 @@ public class Heap {
 
     /**
      * 
+     * @return True if the heap is empty and false if not
+     */
+    public boolean isEmpty() {
+        return size == 0;
+    }
+    
+    /**
+     * 
      * @return True if the heap reached maxsize, false if not
      */
     public boolean isFull() {
@@ -112,9 +120,7 @@ public class Heap {
         }
     }
     
-    
-
-
+   
     /**
      * Building the heap to be in correct order
      */
@@ -188,6 +194,7 @@ public class Heap {
             
             // move down to the next level
             start += levelSize;
+            str += "\n";
             levelSize *= 2;
         }
         
