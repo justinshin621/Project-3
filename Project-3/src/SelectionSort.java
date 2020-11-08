@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.ArrayList;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Arrays;
@@ -57,15 +58,36 @@ public class SelectionSort {
 			return;
 		}
 
+		//Input buffer & output buffer
+		byte[] inputBuffer;
+		Record[] outputBuffer = new Record[1024];
+		
+		int runCounter = 0;
+		int bufferCounter = 0;
+		
+		//ArrayList to keep track of run counters
+		ArrayList<Integer> runList = new ArrayList<Integer>();
+		
 		// Edge case that deals with when the number of blocks
 		// in the binary file is greater than 16
 		for (int i = 0; i < numOfBlocks; i++) {
-			byte[] inputData = new byte[BLOCK_SIZE];
-			if (raf.read(inputData, 0, BLOCK_SIZE) != -1) {
-				// Place
-				for (int j = 0; j < inputData.length; j += 8) {
-					Record temp = new Record(Arrays.copyOfRange(inputData, j, j + 8));
+			inputBuffer = new byte[BLOCK_SIZE];
+			raf.read(inputBuffer, 0, BLOCK_SIZE);
+			// Inserts values until the heap is full
+			if (!minHeap.isFull()) {
+				for (int j = inputBuffer.length; j >= 0; j -= 8) {
+					Record temp = new Record(Arrays.copyOfRange(inputBuffer, j - 8, j));
 					minHeap.insert(temp);
+				}
+			}
+			// Start output buffer process
+			else {
+				for (int j = inputBuffer.length; j >= 0; j -= 8) {
+					
+					Record temp = new Record(Arrays.copyOfRange(inputBuffer, j - 8, j));
+					outputBuffer[bufferCounter] = minHeap.removeMin();
+					if (temp.compareTo(minRecord))
+					if ( )
 				}
 			}
 		}
