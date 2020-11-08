@@ -71,18 +71,29 @@ public class Externalsorting {
         RandomAccessFile raf,
         FileOutputStream outputStream)
         throws IOException {
+        
+        int numOfBlocks = (int)(raf.length() / BLOCK_SIZE); // Receiving the
+
 
         // We will be first storing all of the data into a byte array
-        byte[] inputData = new byte[(int)raf.length()];
-        raf.read(inputData);
+        byte[] inputBuffer = new byte[BLOCK_SIZE];
 
-        // We then grab respective range of bytes from input array and add
-        // new records
-        // into the heap
-        for (int i = 0; i < inputData.length; i += 8) {
-            Record temp = new Record(Arrays.copyOfRange(inputData, i, i + 8));
-            minHeap.insert(temp);
+        // We loop through the input file one block at a time
+        for (int i = 0; i < numOfBlocks; i++) {
+            
+            // Go to the correct offset for the data and then read the blocks into the inputBuffer
+            raf.seek(i * BLOCK_SIZE);
+            raf.read(inputBuffer);
+            
+            // We then grab respective range of bytes from input array and add
+            // new records
+            // into the heap
+            for (int j = 0; j < inputBuffer.length; j += 8) {
+                Record temp = new Record(Arrays.copyOfRange(inputBuffer, j, j + 8));
+                minHeap.insert(temp);
+            }          
         }
+
 
         int heapSize = minHeap.getSize(); // To keep track of the current size
         int recordsPrinted = 0; // To keep track of record for console output
