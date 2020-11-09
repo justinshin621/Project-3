@@ -5,6 +5,9 @@
  *
  */
 public class Heap {
+    
+    public static final int HEAP_SIZE = 16384;
+
 
     private Record[] heap;
     private int maxsize;
@@ -31,6 +34,7 @@ public class Heap {
         return size;
     }
 
+
     /**
      * 
      * @return True if the heap is empty and false if not
@@ -38,7 +42,8 @@ public class Heap {
     public boolean isEmpty() {
         return size == 0;
     }
-    
+
+
     /**
      * 
      * @return True if the heap reached maxsize, false if not
@@ -46,7 +51,8 @@ public class Heap {
     public boolean isFull() {
         return size == maxsize;
     }
-    
+
+
     /**
      * 
      * @param pos
@@ -108,7 +114,6 @@ public class Heap {
      */
     public void insert(Record record) {
         if (size >= maxsize) {
-            System.out.println("Heap is full");
             return;
         }
         int curr = size++;
@@ -119,43 +124,70 @@ public class Heap {
             curr = parent(curr);
         }
     }
-    
-   
+
+
     /**
-     * Building the heap to be in correct order
+     * Rebuilding the heap, restoring the size and the order assuming the # of
+     * hidden values == maxsize
      */
     public void buildheap() {
+        maxsize = HEAP_SIZE;
+        size = maxsize;
         for (int i = maxsize / 2 - 1; i >= 0; i--) {
             siftDown(i);
         }
     }
-    
+
+
+    /**
+     * Rebuilding the heap, restoring the current size and reordering the heap
+     * 
+     * @param hiddenValues
+     *            The # of hidden values in the heap
+     */
+    public void buildHeap(int hiddenValues) {
+        maxsize = HEAP_SIZE;
+        size = hiddenValues;
+        for (int i = maxsize / 2 - 1; i >= 0; i--) {
+            siftDown(i);
+        }        
+    }
+
+
     /**
      * Puts an element into its correct place
      * 
-     * @param pos The position for the element
+     * @param pos
+     *            The position for the element
      */
     public void siftDown(int pos) {
 
-        if ((pos < 0) || (pos >= size)) return; // Illegal position
+        if ((pos < 0) || (pos >= size))
+            return; // Illegal position
         while (!isLeaf(pos)) {
-          int j = leftChild(pos);
-          if ((j<(size-1)) && (heap[j].compareTo(heap[j+1]) < 0))
-            j++; // j is now index of child with greater value
-          if (heap[pos].compareTo(heap[j]) >= 0) return;
-          swap(heap, pos, j);
-          pos = j;  // Move down
+            int j = leftChild(pos);
+            if ((j < (size - 1)) && (heap[j].compareTo(heap[j + 1]) < 0))
+                j++; // j is now index of child with greater value
+            if (heap[pos].compareTo(heap[j]) >= 0)
+                return;
+            swap(heap, pos, j);
+            pos = j; // Move down
         }
-      } 
+    }
+
 
     /**
-     * Swaps the first and last records of the heap and decrements size
+     * Swaps the first and last records of the heap and hides the value that was
+     * swapped.
+     * Also sifts down the top value that was swapped.
      */
     public void swapFirstAndLast() {
-    	swap(this.heap, 0, size - 1);
-    	this.size--;
+        swap(this.heap, 0, --size);
+        this.maxsize--;
+
+        siftDown(0);
     }
-    
+
 
     /**
      * Swapping the elements from the array based on two indices
@@ -172,8 +204,8 @@ public class Heap {
         heap[i] = heap[j];
         heap[j] = temp;
     }
-    
-    
+
+
     /**
      * Return the minimum value
      * 
@@ -187,10 +219,11 @@ public class Heap {
         siftDown(0); // Put new heap root val in correct place
         return heap[size];
     }
-    
+
+
     public void print() {
         String str = "{ ";
-        
+
         int start = 0;
         int levelSize = 1;
         while (start < getSize()) {
@@ -199,13 +232,13 @@ public class Heap {
             for (int i = start; i < start + levelSize && i < getSize(); i++)
                 str += (heap[i].toString() + " ");
             str += ") ";
-            
+
             // move down to the next level
             start += levelSize;
             str += "\n";
             levelSize *= 2;
         }
-        
+
         str += "}";
         System.out.println(str);
     }

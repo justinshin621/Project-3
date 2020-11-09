@@ -42,7 +42,7 @@ public class Externalsorting {
                 sort(raf, outputStream);
             }
             else {
-                SelectionSort.sort(minHeap, raf, outputStream);
+                SelectionSort.sort(minHeap, raf, outputFile);
             }
 
             // Closes the file and stream
@@ -81,9 +81,8 @@ public class Externalsorting {
         // We loop through the input file one block at a time
         for (int i = 0; i < numOfBlocks; i++) {
             
-            // Go to the correct offset for the data and then read the blocks into the inputBuffer
-            raf.seek(i * BLOCK_SIZE);
-            raf.read(inputBuffer);
+            // Grab the data from the file and insert into inputBuffer 1 block at a time
+            raf.read(inputBuffer, 0, BLOCK_SIZE);
             
             // We then grab respective range of bytes from input array and add
             // new records
