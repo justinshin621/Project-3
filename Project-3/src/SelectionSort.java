@@ -83,17 +83,21 @@ public class SelectionSort {
                     // Places the record that was just removed into the
                     // outputBuffer
                     for (int index = 0; index < 8; index++) {
-                        outputBuffer[outputIndex] = outputRecord.getData()[index];
+                        outputBuffer[outputIndex] = outputRecord
+                            .getData()[index];
                         outputIndex++;
                     }
                     runCounter++; // Increment run count every time record is
                                   // popped out of heap
 
-                    // 1st Condition: The record in input is >= to the output
-                    if (inputRecord.compareTo(outputRecord) >= 0) {
+                    // 1st Condition: The record in input is greater than or
+                    // equal to the record in the output buffer
+                    if (inputRecord.compareTo(outputRecord) <= 0) {
                         minHeap.insert(inputRecord);
+                        minHeap.siftDown(0);
                     }
-                    // 2nd Condition: The record in input is < the output
+                    // 2nd Condition: The record in input is less than the
+                    // output
                     else {
                         minHeap.insert(inputRecord);
                         minHeap.swapFirstAndLast();
@@ -124,7 +128,7 @@ public class SelectionSort {
         int hiddenValues = HEAP_SIZE - minHeap.getSize(); // The number of
                                                           // hidden values in
                                                           // the heap
-        
+
         // Remove the Records from the heap one by one until popped all visible
         // records
         while (!minHeap.isEmpty()) {
@@ -146,7 +150,7 @@ public class SelectionSort {
 
         // Once the size of the heap reaches 0 that means we popped all of the
         // seen values in the heap
-        runList.add(runCounter);    // We add the past run into the list
+        runList.add(runCounter); // We add the past run into the list
 
         runCounter = 0; // We reset the run counter to 0
 
@@ -170,12 +174,16 @@ public class SelectionSort {
             runCounter++; // Increase run counter when record goes to output
                           // buffer
         }
-        
-        runList.add(runCounter);    // We add the past run length to the list
-        
+
+        runList.add(runCounter); // We add the past run length to the list
+
         // Now we perform multi-way merge on the runs that we have
-        MultiwayMerge.merge(minHeap, runList, runFile);     
-                
+        MultiwayMerge.merge(minHeap, runList, runFile);
+
+        for (int i = 0; i < runList.size(); i++) {
+            System.out.println(runList.get(i));
+        }
+
         runFile.close(); // Close the runFile
     }
 
