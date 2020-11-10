@@ -38,7 +38,7 @@ public class SelectionSort {
                                                             // input file
 
         // The file where we will dump all of ours runs into
-        FileOutputStream runFile = new FileOutputStream("runfile.bin");
+        RandomAccessFile runFile = new RandomAccessFile("runfile.bin", "rw");
 
         // Input buffer & output buffer
         byte[] inputBuffer = new byte[BLOCK_SIZE];
