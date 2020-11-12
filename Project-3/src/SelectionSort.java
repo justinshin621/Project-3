@@ -151,6 +151,7 @@ public class SelectionSort {
         // Once the size of the heap reaches 0 that means we popped all of the
         // seen values in the heap
         runList.add(runCounter); // We add the past run into the list
+        System.out.println(runCounter);
 
         runCounter = 0; // We reset the run counter to 0
 
@@ -180,9 +181,6 @@ public class SelectionSort {
         // Now we perform multi-way merge on the runs that we have
         MultiwayMerge.merge(minHeap, runList, runFile);
 
-        for (int i = 0; i < runList.size(); i++) {
-            System.out.println(runList.get(i));
-        }
 
         runFile.close(); // Close the runFile
     }
