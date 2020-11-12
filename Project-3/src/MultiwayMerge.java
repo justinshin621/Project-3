@@ -27,7 +27,7 @@ public class MultiwayMerge {
     public static void merge(
         Heap minHeap,
         ArrayList<Integer> runList,
-        RandomAccessFile runFile) throws IOException {
+        RandomAccessFile runFile, RandomAccessFile inputFile) throws IOException {
     	
     	RandomAccessFile mergeFile = new RandomAccessFile("mergefile.bin", "rw");
     	
@@ -48,7 +48,9 @@ public class MultiwayMerge {
         		//Edge Case: When there is not enough bytes to make a block
         		//Change to 1024 if records
         		if (lengthOfRun * 8 < 8192) {
+        		    
         			runFile.read(inputBuffer, 8192 * blockIndex, lengthOfRun);
+        			
         			for (int j = 0; j < lengthOfRun * 8; j += 8) {
         				// Check if the minHeap is full yet before inserting
         				if (!minHeap.isFull())

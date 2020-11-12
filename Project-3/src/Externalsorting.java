@@ -29,7 +29,7 @@ public class Externalsorting {
      */
     public static void read(String binaryFile, String outputFile) {
         try {
-            RandomAccessFile raf = new RandomAccessFile(binaryFile, "r");
+            RandomAccessFile raf = new RandomAccessFile(binaryFile, "rw");
             int numOfBlocks = (int)(raf.length() / BLOCK_SIZE); // Receiving the
                                                                 // #
             // of blocks of the
