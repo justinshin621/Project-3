@@ -179,7 +179,7 @@ public class SelectionSort {
         runList.add(runCounter); // We add the past run length to the list
 
         // Now we perform multi-way merge on the runs that we have
-        MultiwayMerge.merge(minHeap, runList, runFile, raf);
+        MultiwayMerge.merge(minHeap, runList, runFile);
 
 
         runFile.close(); // Close the runFile

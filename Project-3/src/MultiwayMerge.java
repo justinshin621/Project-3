@@ -27,7 +27,7 @@ public class MultiwayMerge {
     public static void merge(
         Heap minHeap,
         ArrayList<Integer> runList,
-        RandomAccessFile runFile, RandomAccessFile inputFile) throws IOException {
+        RandomAccessFile runFile) throws IOException {
     	
     	RandomAccessFile mergeFile = new RandomAccessFile("mergefile.bin", "rw");
     	
