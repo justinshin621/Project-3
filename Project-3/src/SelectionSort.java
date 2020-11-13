@@ -151,7 +151,6 @@ public class SelectionSort {
         // Once the size of the heap reaches 0 that means we popped all of the
         // seen values in the heap
         runList.add(runCounter); // We add the past run into the list
-        System.out.println(runCounter);
 
         runCounter = 0; // We reset the run counter to 0
 

@@ -42,6 +42,13 @@ public class Record {
     
     /**
      * 
+     * @return The run flag for the Record
+     */
+    public int getFlag() {
+        return flag;
+    }
+    /**
+     * 
      * @param compare The record that we are comparing to
      * @return The difference of key values
      */
