@@ -13,8 +13,9 @@ public class Externalsorting {
      * 
      * @param args
      *            The arguments that the user passes
+     * @throws IOException 
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         read(args[0], args[1]);
     }
 
@@ -27,8 +28,7 @@ public class Externalsorting {
      * @param outputFile
      *            The output file as a string
      */
-    public static void read(String binaryFile, String outputFile) {
-        try {
+    public static void read(String binaryFile, String outputFile) throws IOException{
             RandomAccessFile raf = new RandomAccessFile(binaryFile, "rw");
             int numOfBlocks = (int)(raf.length() / BLOCK_SIZE); // Receiving the
                                                                 // #
@@ -48,10 +48,6 @@ public class Externalsorting {
             // Closes the file and stream
             raf.close();
             outputStream.close();
-        }
-        catch (IOException e) {
-            System.out.println("File not found");
-        }
     }
 
 
