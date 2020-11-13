@@ -99,6 +99,7 @@ public class SelectionSort {
                     // 2nd Condition: The record in input is less than the
                     // output
                     else {
+                                               
                         minHeap.insert(inputRecord);
                         minHeap.swapFirstAndLast();
                     }
@@ -117,18 +118,16 @@ public class SelectionSort {
                 // file
                 runFile.write(outputBuffer);
             }
-        }
-        // Once we reach the end of the file...
-
-        // We have to pop off all of the seen values of the heap and add them
-        // into outputBuffer and output to runFile when outputBuffer is full
-
-        outputIndex = 0; // Reset the outputBuffer index
-
-        int hiddenValues = HEAP_SIZE - minHeap.getSize(); // The number of
-                                                          // hidden values in
-                                                          // the heap
-
+        }        
+        
+        runList.add(runCounter);
+        
+        runCounter = 0;
+        
+        minHeap.buildheap();
+        
+        outputIndex = 0;
+        
         // Remove the Records from the heap one by one until popped all visible
         // records
         while (!minHeap.isEmpty()) {
@@ -147,41 +146,19 @@ public class SelectionSort {
             runCounter++; // Increase run counter when record goes to output
                           // buffer
         }
-
+        
+        
         // Once the size of the heap reaches 0 that means we popped all of the
         // seen values in the heap
         runList.add(runCounter); // We add the past run into the list
 
-        runCounter = 0; // We reset the run counter to 0
-
-        // We rebuild the heap based on the # of hidden values
-        minHeap.buildHeap(hiddenValues);
-
-        // Repeat the same process, pop off all of the values into outputBuffer
-        while (!minHeap.isEmpty()) {
-            Record temp = minHeap.removeMin();
-
-            for (int index = 0; index < 8; index++) {
-                outputBuffer[outputIndex] = temp.getData()[index];
-                outputIndex++;
-            }
-            // If the outputBuffer is full then dump to runFile and reset index
-            if (outputIndex == BLOCK_SIZE) {
-                runFile.write(outputBuffer);
-                outputIndex = 0;
-            }
-
-            runCounter++; // Increase run counter when record goes to output
-                          // buffer
-        }
-
-        runList.add(runCounter); // We add the past run length to the list
-
+        
         // Now we perform multi-way merge on the runs that we have
-        MultiwayMerge.merge(minHeap, runList, runFile);
+        MultiwayMerge.merge(minHeap, runList, runFile, outputFileName);
 
 
         runFile.close(); // Close the runFile
+        
     }
 
 }
