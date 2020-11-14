@@ -18,7 +18,7 @@
 // during the discussion. I have violated neither the spirit nor
 // letter of this restriction.
 //
-//- Andy Cho (candy) Justin Shin (justinshin)
+// - Andy Cho (candy) Justin Shin (justinshin)
 
 import java.io.IOException;
 import java.io.RandomAccessFile;

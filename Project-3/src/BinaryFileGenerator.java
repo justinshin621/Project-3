@@ -1,3 +1,4 @@
+
 // On my honor:
 //
 // - I have not used source code obtained from another student,
@@ -18,14 +19,15 @@
 // during the discussion. I have violated neither the spirit nor
 // letter of this restriction.
 //
-//- Andy Cho (candy) Justin Shin (justinshin)
+// - Andy Cho (candy) Justin Shin (justinshin)
 import java.io.*;
 import java.util.*;
+
 /**
- *  Generates random binary file
+ * Generates random binary file
  *
- *  @author Justin Shin, Andy Cho
- *  @version 2020.11.14
+ * @author Justin Shin, Andy Cho
+ * @version 2020.11.14
  */
 public class BinaryFileGenerator
 {
@@ -33,11 +35,11 @@ public class BinaryFileGenerator
      * @NUM_RECS Num of records in each block
      */
     static final int      NUM_RECS = 1024; // Each record holds 8 bytes. Each
-                                          // block has 8192 bytes
+                                           // block has 8192 bytes
 
     /** Initialize the random variable */
-    static private Random value   = new Random(); // Hold the Random class
-                                                  // object
+    static private Random value    = new Random(); // Hold the Random class
+                                                   // object
 
     /**
      * Gets random integer value
@@ -63,10 +65,14 @@ public class BinaryFileGenerator
 
     /**
      * Main method to initialize file with # of blocks
-     * @param args loads args[0](file name) and args[1](num of blocks)
-     * @throws IOException when file creation fails
+     *
+     * @param args
+     *            loads args[0](file name) and args[1](num of blocks)
+     * @throws IOException
+     *             when file creation fails
      */
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args)
+        throws IOException
     {
         int val;
         float val2;

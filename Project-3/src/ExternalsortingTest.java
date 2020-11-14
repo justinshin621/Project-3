@@ -1,3 +1,4 @@
+
 // On my honor:
 //
 // - I have not used source code obtained from another student,
@@ -18,7 +19,7 @@
 // during the discussion. I have violated neither the spirit nor
 // letter of this restriction.
 //
-//- Andy Cho (candy) Justin Shin (justinshin)
+// - Andy Cho (candy) Justin Shin (justinshin)
 import java.io.RandomAccessFile;
 import java.util.Arrays;
 
@@ -54,8 +55,9 @@ public class ExternalsortingTest
 
     /**
      * Tests the read method in the case that file is 8 blocks size
+     *
      * @throws IOException
-     *           When file is not found
+     *             When file is not found
      */
     public void testRead8Blocks()
         throws IOException
@@ -88,8 +90,9 @@ public class ExternalsortingTest
 
     /**
      * Tests the read method in the case that file is 16 blocks size
+     *
      * @throws IOException
-     *           When file is not found
+     *             When file is not found
      */
     public void testRead16Blocks()
         throws IOException
@@ -122,8 +125,9 @@ public class ExternalsortingTest
 
     /**
      * Tests the read method in the case that file is 16 blocks size
+     *
      * @throws IOException
-     *           When file is not found
+     *             When file is not found
      */
     public void testRead32Blocks()
         throws IOException
