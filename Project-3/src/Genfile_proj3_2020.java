@@ -1,24 +1,17 @@
-
-/************************************************************************
- * WARNING: This program uses the Assertion class. When it is run with wrong
- * arguments, assertions must be turned on. For example, under Linux, use: java
- * -ea Genfile_proj3_2020 This file generate a data file for project 3. The size
- * is a multiple of 8192 bytes. Each record is one non-negative int and one
- * float. Please be aware that this small piece of code is not designed to
- * generate test cases. Please modify the code accordingly if you want to use it
- * for other purposes. Usage Example: java Genfile_proj3_2020 Sampledata.bin 2
- * This will generate a binary data file Sampledata.bin with 2 blocks (16,384
- * bytes).
- ************************************************************************/
-
 import java.io.*;
 import java.util.*;
-import java.math.*;
-
+/**
+ *  Generates random binary file
+ *
+ *  @author Justin Shin,
+ *  @version 2020.11.14
+ */
 public class Genfile_proj3_2020
 {
-
-    static final int      NumRecs = 1024; // Each record holds 8 bytes. Each
+    /**
+     * @NUM_RECS Num of records in each block
+     */
+    static final int      NUM_RECS = 1024; // Each record holds 8 bytes. Each
                                           // block has 8192 bytes
 
     /** Initialize the random variable */
@@ -49,9 +42,10 @@ public class Genfile_proj3_2020
 
     /**
      * Main method to initialize file with # of blocks
+     * @param args loads args[0](file name) and args[1](num of blocks)
+     * @throws IOException when file creation fails
      */
-    public static void main(String[] args)
-        throws IOException
+    public static void main(String[] args) throws IOException
     {
         int val;
         float val2;
@@ -65,11 +59,11 @@ public class Genfile_proj3_2020
 
         for (int i = 0; i < filesize; i++)
         {
-            for (int j = 0; j < NumRecs; j++)
+            for (int j = 0; j < NUM_RECS; j++)
             {
-                val = (int)(randInt());
+                val = randInt();
                 file.writeInt(val);
-                val2 = (float)(randFloat());
+                val2 = randFloat();
                 file.writeFloat(val2);
             }
         }
