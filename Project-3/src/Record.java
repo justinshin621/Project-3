@@ -19,10 +19,8 @@ public class Record
     /**
      * The constructor for the Record class
      *
-     * @param i
-     *            The id for the record
-     * @param k
-     *            The key for the record
+     * @param d
+     *            The byte array of the record
      */
     public Record(byte[] d)
     {
@@ -33,10 +31,10 @@ public class Record
     /**
      * The overloaded constructor that has flag property
      *
-     * @param i
-     *            The id for the record
-     * @param k
-     *            The key for the record
+     * @param d
+     *            The byte array for the record
+     * @param f
+     *            The flag for the record
      */
     public Record(byte[] d, int f)
     {
@@ -46,6 +44,7 @@ public class Record
 
 
     /**
+     * Gets the byte array
      * @return The byte array data in the record
      */
     public byte[] getData()
@@ -55,6 +54,7 @@ public class Record
 
 
     /**
+     * Gets the flag
      * @return The run flag for the Record
      */
     public int getFlag()
@@ -64,6 +64,7 @@ public class Record
 
 
     /**
+     * Compares two records by the float values in the byte array
      * @param compare
      *            The record that we are comparing to
      * @return The difference of key values
@@ -82,6 +83,7 @@ public class Record
 
 
     /**
+     * String representation of the record.
      * @return Returns the id and the key of the record object
      */
     public String toString()

@@ -25,19 +25,32 @@ public class Genfile_proj3_2020
     static private Random value   = new Random(); // Hold the Random class
                                                   // object
 
+    /**
+     * Gets random integer value
+     *
+     * @return random int
+     */
     static int randInt()
     {
         return value.nextInt(Integer.MAX_VALUE);
     }
 
 
+    /**
+     * Gets random float value
+     *
+     * @return random float
+     */
     static float randFloat()
     {
         return value.nextFloat() * Float.MAX_VALUE;
     }
 
 
-    public static void main(String args[])
+    /**
+     * Main method to initialize file with # of blocks
+     */
+    public static void main(String[] args)
         throws IOException
     {
         int val;
@@ -51,6 +64,7 @@ public class Genfile_proj3_2020
             new BufferedOutputStream(new FileOutputStream(args[0])));
 
         for (int i = 0; i < filesize; i++)
+        {
             for (int j = 0; j < NumRecs; j++)
             {
                 val = (int)(randInt());
@@ -58,6 +72,7 @@ public class Genfile_proj3_2020
                 val2 = (float)(randFloat());
                 file.writeFloat(val2);
             }
+        }
 
         file.flush();
         file.close();

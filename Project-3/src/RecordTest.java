@@ -9,6 +9,9 @@ import junit.framework.TestCase;
 public class RecordTest
     extends TestCase
 {
+    /**
+     *
+     */
     public void testRecord()
     {
         Record rec1 = new Record(
@@ -23,10 +26,11 @@ public class RecordTest
 
         for (int i = 0; i < rec1.getData().length; i++)
         {
-            assertTrue(rec1.getData()[i] == rec1.getData()[i]);
+            assertEquals(rec1.getData()[i], rec1.getData()[i]);
         }
         assertEquals(rec1.compareTo(rec2), 0.0, 1);
-        assertFalse(rec1.compareTo(rec3) == (float)0.0);
+        boolean bool = rec1.compareTo(rec3) == (float)0.0;
+        assertFalse(bool);
 
         assertTrue(rec1.toString().equals("389805380 2.6506237E38"));
         assertEquals(rec3.getFlag(), 3);

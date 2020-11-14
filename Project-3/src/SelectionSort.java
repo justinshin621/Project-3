@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Arrays;
@@ -7,12 +6,18 @@ import java.util.Arrays;
 /**
  * This class will sort the heap of records by selection.
  *
- * @author justin, Andy
+ * @author Justin Shin, Andy Cho
+ * @version 2020.11.14
  */
 public class SelectionSort
 {
-
+    /**
+     * @BLOCK_SIZE byte size of the block
+     */
     public static final int BLOCK_SIZE = 8192;
+    /**
+     * @HEAP_SIZE max byte size of heap
+     */
     public static final int HEAP_SIZE  = 16384;
 
     /**
@@ -20,10 +25,12 @@ public class SelectionSort
      * multi-way merge (if needed) and output it to an output file named
      * outputFileName
      *
+     * @param minHeap
+     *            Heap dealing with sorting
      * @param raf
-     *            Our input binary file as a RandomAccessFile
-     * @param outputFile
-     *            Our output file string name
+     *            Random access file being accessed
+     * @param outputFileName
+     *            name of the output file
      * @throws IOException
      *             An IO exception if PrintWriter not valid
      */
