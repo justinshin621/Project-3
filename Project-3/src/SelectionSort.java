@@ -1,29 +1,35 @@
 import java.util.ArrayList;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Arrays;
 
 /**
  * This class will sort the heap of records by selection.
- * 
- * @author justin, Andy
  *
+ * @author Justin Shin, Andy Cho
+ * @version 2020.11.14
  */
 public class SelectionSort {
 
+    /**
+     * @BLOCK_SIZE byte size of the block
+     */
     public static final int BLOCK_SIZE = 8192;
+    /**
+     * @HEAP_SIZE max byte size of the heap
+     */
     public static final int HEAP_SIZE = 16384;
 
     /**
      * This function is used to sort the input file using Selection Sort and
      * multi-way merge (if needed) and output it to an output file named
      * outputFileName
-     * 
+     *
+     * @param minHeap
+     *            Our min heap being used to sort
      * @param raf
      *            Our input binary file as a RandomAccessFile
-     * @param outputFile
+     * @param outputFileName
      *            Our output file string name
      * @throws IOException
      *             An IO exception if PrintWriter not valid
@@ -100,7 +106,7 @@ public class SelectionSort {
                     // 2nd Condition: The record in input is less than the
                     // output
                     else {
-                                               
+
                         minHeap.insert(inputRecord);
                         minHeap.swapFirstAndLast();
                     }
@@ -119,16 +125,16 @@ public class SelectionSort {
                 // file
                 runFile.write(outputBuffer);
             }
-        }        
-        
+        }
+
         runList.add(runCounter);
-        
+
         runCounter = 0;
-        
+
         minHeap.buildheap();
-        
+
         outputIndex = 0;
-        
+
         // Remove the Records from the heap one by one until popped all visible
         // records
         while (!minHeap.isEmpty()) {
@@ -147,15 +153,15 @@ public class SelectionSort {
             runCounter++; // Increase run counter when record goes to output
                           // buffer
         }
-        
-        
+
+
         // Once the size of the heap reaches 0 that means we popped all of the
         // seen values in the heap
         runList.add(runCounter); // We add the past run into the list
 
-        
+
         // Now we perform multi-way merge on the runs that we have
-        MultiwayMerge.merge(minHeap, runList, runFile, outputFileName);        
+        MultiwayMerge.merge(minHeap, runList, runFile, outputFileName);
     }
 
 }
