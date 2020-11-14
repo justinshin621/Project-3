@@ -139,20 +139,6 @@ public class Heap {
     }
 
 
-    /**
-     * Rebuilding the heap, restoring the current size and reordering the heap
-     * 
-     * @param hiddenValues
-     *            The # of hidden values in the heap
-     */
-    public void buildHeap(int hiddenValues) {
-        maxsize = HEAP_SIZE;
-        size = hiddenValues;
-        for (int i = maxsize / 2 - 1; i >= 0; i--) {
-            siftDown(i);
-        }        
-    }
-
 
     /**
      * Puts an element into its correct place
