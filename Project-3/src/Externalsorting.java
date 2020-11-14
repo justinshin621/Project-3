@@ -1,3 +1,24 @@
+// On my honor:
+//
+// - I have not used source code obtained from another student,
+// or any other unauthorized source, either modified or
+// unmodified.
+//
+// - All source code and documentation used in my program is
+// either my original work, or was derived by me from the
+// source code published in the textbook for this course.
+//
+// - I have not discussed coding details about this project with
+// anyone other than my partner (in the case of a joint
+// submission), instructor, ACM/UPE tutors or the TAs assigned
+// to this course. I understand that I may discuss the concepts
+// of this program with other students, and that another student
+// may help me debug my program so long as neither of us writes
+// anything during the discussion or modifies any computer file
+// during the discussion. I have violated neither the spirit nor
+// letter of this restriction.
+//
+//- Andy Cho (candy) Justin Shin (justinshin)
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -10,10 +31,10 @@ public class Externalsorting {
 
     /**
      * The main class
-     * 
+     *
      * @param args
      *            The arguments that the user passes
-     * @throws IOException 
+     * @throws IOException
      */
     public static void main(String[] args) throws IOException {
         read(args[0], args[1]);
@@ -22,7 +43,7 @@ public class Externalsorting {
 
     /**
      * Reads the two arguments and makes them files
-     * 
+     *
      * @param binaryFile
      *            The input file as a string
      * @param outputFile
@@ -55,10 +76,10 @@ public class Externalsorting {
     /**
      * This function handles the case where the input data is less than 16
      * blocks of data
-     * 
+     *
      * @param raf
      *            The RandomAccessFile that has the binary input
-     * 
+     *
      * @param outputStream
      *            The outputstream that we are writing our records into
      * @throws IOException
@@ -68,7 +89,7 @@ public class Externalsorting {
         RandomAccessFile raf,
         FileOutputStream outputStream)
         throws IOException {
-        
+
         int numOfBlocks = (int)(raf.length() / BLOCK_SIZE); // Receiving the
 
 
@@ -77,17 +98,17 @@ public class Externalsorting {
 
         // We loop through the input file one block at a time
         for (int i = 0; i < numOfBlocks; i++) {
-            
+
             // Grab the data from the file and insert into inputBuffer 1 block at a time
             raf.read(inputBuffer, 0, BLOCK_SIZE);
-            
+
             // We then grab respective range of bytes from input array and add
             // new records
             // into the heap
             for (int j = 0; j < inputBuffer.length; j += 8) {
                 Record temp = new Record(Arrays.copyOfRange(inputBuffer, j, j + 8));
                 minHeap.insert(temp);
-            }          
+            }
         }
 
 
