@@ -105,6 +105,7 @@ public class MultiwayMergeTest
         RandomAccessFile outputFile = new RandomAccessFile("runfile.bin", "r");
         byte[] readOutput = new byte[8192];
         Record temp2 = null;
+        int record = 0;
         for (int i = 0; i < 1000; i++)
         {
             outputFile.read(readOutput, 0, 8192);
@@ -114,10 +115,16 @@ public class MultiwayMergeTest
                     new Record(Arrays.copyOfRange(readOutput, j, j + 8));
                 if (temp2 != null)
                 {
+                    if (temp1.compareTo(temp2) < 0)
+                    {
+                        System.out.print(record);
+                        return;
+                    }
                     assertTrue(temp1.compareTo(temp2) > 0);
                     temp2 =
                         new Record(Arrays.copyOfRange(readOutput, j, j + 8));
                 }
+                record++;
             }
         }
         outputFile.close();
