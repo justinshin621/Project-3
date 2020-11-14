@@ -6,20 +6,20 @@ import java.util.Arrays;
 
 /**
  * This class will sort the heap of records by selection.
- * 
- * @author justin, Andy
  *
+ * @author justin, Andy
  */
-public class SelectionSort {
+public class SelectionSort
+{
 
     public static final int BLOCK_SIZE = 8192;
-    public static final int HEAP_SIZE = 16384;
+    public static final int HEAP_SIZE  = 16384;
 
     /**
      * This function is used to sort the input file using Selection Sort and
      * multi-way merge (if needed) and output it to an output file named
      * outputFileName
-     * 
+     *
      * @param raf
      *            Our input binary file as a RandomAccessFile
      * @param outputFile
@@ -27,11 +27,11 @@ public class SelectionSort {
      * @throws IOException
      *             An IO exception if PrintWriter not valid
      */
-    public static void sort(
-        Heap minHeap,
-        RandomAccessFile raf,
-        String outputFileName)
-        throws IOException {
+    public static
+        void
+        sort(Heap minHeap, RandomAccessFile raf, String outputFileName)
+            throws IOException
+    {
 
         int numOfBlocks = (int)(raf.length() / BLOCK_SIZE); // Receiving the #
                                                             // of blocks of the
@@ -51,21 +51,25 @@ public class SelectionSort {
         ArrayList<Integer> runList = new ArrayList<Integer>();
 
         // Iterate through the input data file one block at a time
-        for (int i = 0; i < numOfBlocks; i++) {
+        for (int i = 0; i < numOfBlocks; i++)
+        {
             // Insert the data from the file into input buffer one block at a
             // time
             raf.read(inputBuffer, 0, BLOCK_SIZE);
 
             // Inserts values until the heap is full
-            if (!minHeap.isFull()) {
-                for (int j = 0; j < inputBuffer.length; j += 8) {
-                    Record temp = new Record(Arrays.copyOfRange(inputBuffer, j,
-                        j + 8));
+            if (!minHeap.isFull())
+            {
+                for (int j = 0; j < inputBuffer.length; j += 8)
+                {
+                    Record temp =
+                        new Record(Arrays.copyOfRange(inputBuffer, j, j + 8));
                     minHeap.insert(temp);
                 }
             }
             // Start output buffer process
-            else {
+            else
+            {
 
                 outputIndex = 0; // Reset outputBuffer Index to start at
                                  // beginning again
@@ -73,18 +77,20 @@ public class SelectionSort {
                 // Iterate through the input buffer one record at a a time and
                 // start selection sort
                 // process
-                for (int j = 0; j < inputBuffer.length; j += 8) {
+                for (int j = 0; j < inputBuffer.length; j += 8)
+                {
                     // Grabs the first value in the input buffer and the top
                     // value of the heap
-                    Record inputRecord = new Record(Arrays.copyOfRange(
-                        inputBuffer, j, j + 8));
+                    Record inputRecord =
+                        new Record(Arrays.copyOfRange(inputBuffer, j, j + 8));
                     Record outputRecord = minHeap.removeMin();
 
                     // Places the record that was just removed into the
                     // outputBuffer
-                    for (int index = 0; index < 8; index++) {
-                        outputBuffer[outputIndex] = outputRecord
-                            .getData()[index];
+                    for (int index = 0; index < 8; index++)
+                    {
+                        outputBuffer[outputIndex] =
+                            outputRecord.getData()[index];
                         outputIndex++;
                     }
                     runCounter++; // Increment run count every time record is
@@ -92,14 +98,16 @@ public class SelectionSort {
 
                     // 1st Condition: The record in input is greater than or
                     // equal to the record in the output buffer
-                    if (inputRecord.compareTo(outputRecord) <= 0) {
+                    if (inputRecord.compareTo(outputRecord) <= 0)
+                    {
                         minHeap.insert(inputRecord);
                         minHeap.siftDown(0);
                     }
                     // 2nd Condition: The record in input is less than the
                     // output
-                    else {
-                                               
+                    else
+                    {
+
                         minHeap.insert(inputRecord);
                         minHeap.swapFirstAndLast();
                     }
@@ -107,7 +115,8 @@ public class SelectionSort {
                     // Once the minHeap is empty that signifies the end of the
                     // run,
                     // Rebuild the heap and reset the run counter
-                    if (minHeap.isEmpty()) {
+                    if (minHeap.isEmpty())
+                    {
                         runList.add(runCounter);
                         runCounter = 0;
                         minHeap.buildheap();
@@ -118,27 +127,30 @@ public class SelectionSort {
                 // file
                 runFile.write(outputBuffer);
             }
-        }        
-        
+        }
+
         runList.add(runCounter);
-        
+
         runCounter = 0;
-        
+
         minHeap.buildheap();
-        
+
         outputIndex = 0;
-        
+
         // Remove the Records from the heap one by one until popped all visible
         // records
-        while (!minHeap.isEmpty()) {
+        while (!minHeap.isEmpty())
+        {
             Record temp = minHeap.removeMin();
 
-            for (int index = 0; index < 8; index++) {
+            for (int index = 0; index < 8; index++)
+            {
                 outputBuffer[outputIndex] = temp.getData()[index];
                 outputIndex++;
             }
             // If the outputBuffer is full then dump to runFile and reset index
-            if (outputIndex == BLOCK_SIZE) {
+            if (outputIndex == BLOCK_SIZE)
+            {
                 runFile.write(outputBuffer);
                 outputIndex = 0;
             }
@@ -146,19 +158,16 @@ public class SelectionSort {
             runCounter++; // Increase run counter when record goes to output
                           // buffer
         }
-        
-        
+
         // Once the size of the heap reaches 0 that means we popped all of the
         // seen values in the heap
         runList.add(runCounter); // We add the past run into the list
 
-        
         // Now we perform multi-way merge on the runs that we have
         MultiwayMerge.merge(minHeap, runList, runFile, outputFileName);
 
-
         runFile.close(); // Close the runFile
-        
+
     }
 
 }
