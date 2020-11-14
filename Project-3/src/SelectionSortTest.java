@@ -46,7 +46,7 @@ public class SelectionSortTest
         throws IOException
     {
         String[] generator = { "generatedFile.bin", "32" };
-        Genfile_proj3_2020.main(generator);
+        BinaryFileGenerator.main(generator);
         RandomAccessFile inputFile =
             new RandomAccessFile("generatedFile.bin", "r");
         Heap minHeap = new Heap(16384);
@@ -83,7 +83,7 @@ public class SelectionSortTest
         throws IOException
     {
         String[] generator = { "generatedFile.bin", "64" };
-        Genfile_proj3_2020.main(generator);
+        BinaryFileGenerator.main(generator);
         RandomAccessFile inputFile =
             new RandomAccessFile("generatedFile.bin", "r");
         Heap minHeap = new Heap(16384);

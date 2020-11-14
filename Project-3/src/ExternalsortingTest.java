@@ -54,12 +54,14 @@ public class ExternalsortingTest
 
     /**
      * Tests the read method in the case that file is 8 blocks size
+     * @throws IOException
+     *           When file is not found
      */
     public void testRead8Blocks()
         throws IOException
     {
         String[] generator = { "generatedFile.bin", "8" };
-        Genfile_proj3_2020.main(generator);
+        BinaryFileGenerator.main(generator);
         String[] runInfo = { "generatedFile.bin", "runfile.bin" };
         Externalsorting.main(runInfo);
         RandomAccessFile outputFile = new RandomAccessFile("runfile.bin", "r");
@@ -86,12 +88,14 @@ public class ExternalsortingTest
 
     /**
      * Tests the read method in the case that file is 16 blocks size
+     * @throws IOException
+     *           When file is not found
      */
     public void testRead16Blocks()
         throws IOException
     {
         String[] generator = { "generatedFile.bin", "16" };
-        Genfile_proj3_2020.main(generator);
+        BinaryFileGenerator.main(generator);
         String[] runInfo = { "generatedFile.bin", "runfile.bin" };
         Externalsorting.main(runInfo);
         RandomAccessFile outputFile = new RandomAccessFile("runfile.bin", "r");
@@ -118,12 +122,14 @@ public class ExternalsortingTest
 
     /**
      * Tests the read method in the case that file is 16 blocks size
+     * @throws IOException
+     *           When file is not found
      */
     public void testRead32Blocks()
         throws IOException
     {
         String[] generator = { "generatedFile.bin", "32" };
-        Genfile_proj3_2020.main(generator);
+        BinaryFileGenerator.main(generator);
         String[] runInfo = { "generatedFile.bin", "runfile.bin" };
         Externalsorting.main(runInfo);
         RandomAccessFile outputFile = new RandomAccessFile("runfile.bin", "r");

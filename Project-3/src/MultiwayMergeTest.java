@@ -45,7 +45,7 @@ public class MultiwayMergeTest
         throws IOException
     {
         String[] generator = { "generatedFile.bin", "32" };
-        Genfile_proj3_2020.main(generator);
+        BinaryFileGenerator.main(generator);
         RandomAccessFile inputFile =
             new RandomAccessFile("generatedFile.bin", "r");
         Heap minHeap = new Heap(16384);
@@ -82,7 +82,7 @@ public class MultiwayMergeTest
         throws IOException
     {
         String[] generator = { "generatedFile.bin", "512" };
-        Genfile_proj3_2020.main(generator);
+        BinaryFileGenerator.main(generator);
         RandomAccessFile inputFile =
             new RandomAccessFile("generatedFile.bin", "r");
         Heap minHeap = new Heap(16384);
@@ -119,7 +119,7 @@ public class MultiwayMergeTest
         throws IOException
     {
         String[] generator = { "generatedFile.bin", "1000" };
-        Genfile_proj3_2020.main(generator);
+        BinaryFileGenerator.main(generator);
         RandomAccessFile inputFile =
             new RandomAccessFile("generatedFile.bin", "r");
         Heap minHeap = new Heap(16384);

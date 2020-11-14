@@ -24,10 +24,10 @@ import java.util.*;
 /**
  *  Generates random binary file
  *
- *  @author Justin Shin,
+ *  @author Justin Shin, Andy Cho
  *  @version 2020.11.14
  */
-public class Genfile_proj3_2020
+public class BinaryFileGenerator
 {
     /**
      * @NUM_RECS Num of records in each block
